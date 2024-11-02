@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "55496018574",
+    "project_id": "notesneo-63191",
+    "storage_bucket": "notesneo-63191.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:55496018574:android:a6d4fa2f683ac9913517df",
+        "android_client_info": {
+          "package_name": "com.example.deepaknote"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBCjqWipbSORzpa4l2oKOqGzeViHj___g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
