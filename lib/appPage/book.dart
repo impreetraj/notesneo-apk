@@ -30,10 +30,7 @@ class _BookState extends State<Book> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.active) {
                 if (snapshot.hasData && snapshot.data != null) {
-                  return Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Expanded(
-                        child: ListView.builder(
+                  return ListView.builder(
                       itemCount: snapshot.data!.docs.length,
                       itemBuilder: (context, index) {
                         Map<String, dynamic> BookData =
@@ -163,7 +160,7 @@ class _BookState extends State<Book> {
                           ],
                         );
                       },
-                    )),
+                    
                   );
                 } else {
                   return Text("No data");

@@ -33,7 +33,7 @@ class _SemesterSevenState extends State<SemesterSeven> {
                 if (snapshot.hasData && snapshot.data != null) {
                   return Padding(
                     padding: const EdgeInsets.all(12.0),
-                    child: Expanded(
+                  
                         child: ListView.builder(
                       itemCount: snapshot.data!.docs.length,
                       itemBuilder: (context, index) {
@@ -164,7 +164,7 @@ class _SemesterSevenState extends State<SemesterSeven> {
                           ],
                         );
                       },
-                    )),
+                    )
                   );
                 } else {
                   return Text("No data");

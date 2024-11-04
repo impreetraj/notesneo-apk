@@ -17,7 +17,8 @@ class _PdfOpenState extends State<PdfOpen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Pdf View"),),
+      appBar: AppBar(title: Text("Pdf View"),
+      centerTitle: true,),
       body: SfPdfViewer.network(widget.pdf),
 
       

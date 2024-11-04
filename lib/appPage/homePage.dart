@@ -11,6 +11,7 @@ import 'package:deepaknote/appPage/Admin.dart';
 import 'package:deepaknote/loginIssue/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -65,7 +66,8 @@ class _HomePageState extends State<HomePage> {
                     if (currentUser != null) {
                       email = currentUser.email.toString();
                     }
-                    if (email == "deepakmodi8676@gmail.com") {
+                    if (email == "deepakmodi8676@gmail.com" ||
+                        email == "preetrajoffical@gmail.com" ) {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -75,7 +77,6 @@ class _HomePageState extends State<HomePage> {
                       const snackBar = SnackBar(
                         content: Center(child: Text('You Are not Admin')),
                       );
-
 
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     }
@@ -145,6 +146,22 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 20,
             ),
+            Center(
+              child: ElevatedButton(
+                  onPressed: () {
+                    const link =
+                        "https://chat.whatsapp.com/EtBjr3a2V8n1biCfXYf1iw";
+                    launchUrl(Uri.parse(link),
+                        mode: LaunchMode.externalApplication);
+                  },
+                  child: Text(
+                    "Join Communtity",
+                    style: TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
+                  )),
+            ),
+            SizedBox(
+              height: 20,
+            ),
             Container(
               margin: EdgeInsets.only(left: 20.0, right: 20.0),
               child: Card(
@@ -161,6 +178,9 @@ class _HomePageState extends State<HomePage> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(50),
                             color: Colors.yellow),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(50),
+                            child: Image.asset("assets/logo/preetraj.jpeg")),
                       ),
                       SizedBox(
                         width: 20,
@@ -178,17 +198,78 @@ class _HomePageState extends State<HomePage> {
                                   fontSize: 21, fontWeight: FontWeight.w600),
                             ),
                             Text(
-                              "B.Tech , Cse",
+                              "SAITM | MDU",
                               style: TextStyle(
                                   fontSize: 17, fontWeight: FontWeight.w500),
                             ),
                             Text(
-                              "Roll no : 223024",
+                              "B.Tech CSE 22",
                               style: TextStyle(
                                   fontSize: 17, fontWeight: FontWeight.w500),
                             ),
                             Text(
                               "Full Stack App Developer",
+                              style: TextStyle(
+                                  fontSize: 17, fontWeight: FontWeight.w500),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              margin: EdgeInsets.only(left: 20.0, right: 20.0),
+              child: Card(
+                child: Container(
+                  height: 100,
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 14,
+                      ),
+                      Container(
+                        width: 70,
+                        height: 70,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: Colors.yellow),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(50),
+                            child: Image.asset("assets/logo/deepak.jpeg")),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Container(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 7,
+                            ),
+                            Text(
+                              "Deepak Modi",
+                              style: TextStyle(
+                                  fontSize: 21, fontWeight: FontWeight.w600),
+                            ),
+                            Text(
+                              "SAITM | MDU",
+                              style: TextStyle(
+                                  fontSize: 17, fontWeight: FontWeight.w500),
+                            ),
+                            Text(
+                              "B.Tech CSE 22",
+                              style: TextStyle(
+                                  fontSize: 17, fontWeight: FontWeight.w500),
+                            ),
+                            Text(
+                              "Full Stack Web Developer",
                               style: TextStyle(
                                   fontSize: 17, fontWeight: FontWeight.w500),
                             ),
@@ -219,64 +300,9 @@ class _HomePageState extends State<HomePage> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(50),
                             color: Colors.yellow),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Container(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 7,
-                            ),
-                            Text(
-                              "Preet Raj",
-                              style: TextStyle(
-                                  fontSize: 21, fontWeight: FontWeight.w600),
-                            ),
-                            Text(
-                              "B.Tech , Cse",
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.w500),
-                            ),
-                            Text(
-                              "Roll no : 223024",
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.w500),
-                            ),
-                            Text(
-                              "Full Stack App Developer",
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.w500),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 20.0, right: 20.0),
-              child: Card(
-                child: Container(
-                  height: 100,
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Container(
-                        width: 70,
-                        height: 70,
-                        decoration: BoxDecoration(
+                        child: ClipRRect(
                             borderRadius: BorderRadius.circular(50),
-                            color: Colors.yellow),
+                            child: Image.asset("assets/logo/nitish.jpeg")),
                       ),
                       SizedBox(
                         width: 20,
@@ -289,17 +315,17 @@ class _HomePageState extends State<HomePage> {
                               height: 7,
                             ),
                             Text(
-                              "Preet Raj",
+                              "Nitish Modi",
                               style: TextStyle(
                                   fontSize: 21, fontWeight: FontWeight.w600),
                             ),
                             Text(
-                              "B.Tech , Cse",
+                              "SAITM | MDU",
                               style: TextStyle(
                                   fontSize: 17, fontWeight: FontWeight.w500),
                             ),
                             Text(
-                              "Roll no : 223024",
+                              "B.Tech CSE 22",
                               style: TextStyle(
                                   fontSize: 17, fontWeight: FontWeight.w500),
                             ),
@@ -333,11 +359,10 @@ class _HomePageState extends State<HomePage> {
                           Text(
                             "Copyright © NotesNeo | All Rights Reserved ",
                             style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 15,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white),
                           ),
-                          
                           SizedBox(
                             height: 4,
                           ),
@@ -369,7 +394,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Container(
                         width: double.infinity,
-                        height: MediaQuery.of(context).size.height / 4,
+                        height: MediaQuery.of(context).size.height / 3.8,
                         decoration: BoxDecoration(color: Colors.pink),
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -578,6 +603,19 @@ class _HomePageState extends State<HomePage> {
                             child: Text("Logout",
                                 style: TextStyle(
                                     fontSize: 23,
+                                    fontWeight: FontWeight.w600))),
+                      ),
+                      Container(
+                        width: double.infinity,
+                        height: MediaQuery.of(context).size.height / 19,
+                        margin: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width / 12,
+                            top: MediaQuery.of(context).size.height / 47),
+                        child: Center(
+                           
+                            child: Text("Version : 1.0.0",
+                                style: TextStyle(
+                                    fontSize: 13,
                                     fontWeight: FontWeight.w600))),
                       ),
                     ]),

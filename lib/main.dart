@@ -1,4 +1,5 @@
 import 'package:deepaknote/appPage/Admin.dart';
+import 'package:deepaknote/appPage/book.dart';
 import 'package:deepaknote/appPage/bottomNav.dart';
 import 'package:deepaknote/appPage/homePage.dart';
 import 'package:deepaknote/loginIssue/Splash.dart';
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
       home:  (FirebaseAuth.instance.currentUser != null) ? BottomNav() : Splash(),
-      // home:  AdminPanel(),
+      // home:  Book(),
     );
   }
 }

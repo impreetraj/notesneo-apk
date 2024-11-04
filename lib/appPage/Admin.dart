@@ -473,8 +473,11 @@ class _UploadState extends State<Upload> {
                     ],
                   ),
                 ),
-                ElevatedButton(
+                CupertinoButton(
                     onPressed: () async {
+                      setState(() {
+                            submit = true;
+                          });
                       
                       String main_name = mainName_controller.text.trim();
                       String main_description =
@@ -812,13 +815,18 @@ class _UploadState extends State<Upload> {
                           imgname4 = ' ';
 
                           setState(() {
-                            submit = true;
+                            submit = false;
                           });
                         });
                       }
                     },
-                    child:
-                        submit ? CircularProgressIndicator() : Text("Submit"))
+                    child:Container(
+                      width: 200,
+                      height: 60,
+                      decoration: BoxDecoration(color: Colors.pink, borderRadius: BorderRadius.circular(30)),
+                      child: submit ? Center(child: CircularProgressIndicator()) : Center(child: Text("Submit" , style: TextStyle(fontSize: 24 , color: Colors.white , fontWeight: FontWeight.w600),)),
+                    )
+                        )
               ],
             ),
           ),

@@ -43,8 +43,7 @@ class _FavouriteState extends State<Favourite> {
             if (snapshot.hasData && snapshot.data != null) {
               return Padding(
                 padding: const EdgeInsets.all(12.0),
-                child: Expanded(
-                  child: ListView.builder(
+                child:  ListView.builder(
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (context, index) {
                       Map<String, dynamic> FavData = snapshot.data!.docs[index]
@@ -138,7 +137,7 @@ class _FavouriteState extends State<Favourite> {
                       );
                     },
                   ),
-                ),
+                
               );
             } else {
               return Center(child: Text("No Data"));
