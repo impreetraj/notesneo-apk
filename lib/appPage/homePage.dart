@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                       email = currentUser.email.toString();
                     }
                     if (email == "deepakmodi8676@gmail.com" ||
-                        email == "preetrajoffical@gmail.com" ) {
+                        email == "preetrajoffical@gmail.com" || email== "nubhawbarnwal@gmail.com" || email== "nitishmodi78@gmail.com") {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
