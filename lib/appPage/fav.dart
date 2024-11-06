@@ -43,29 +43,25 @@ class _FavouriteState extends State<Favourite> {
             if (snapshot.hasData && snapshot.data != null) {
               return Padding(
                 padding: const EdgeInsets.all(12.0),
-                child:  ListView.builder(
-                    itemCount: snapshot.data!.docs.length,
-                    itemBuilder: (context, index) {
-                      Map<String, dynamic> FavData = snapshot.data!.docs[index]
-                          .data() as Map<String, dynamic>;
-                           String image = FavData['image'].toString();
-                                String name = FavData['name'].toString();
-                                String discrptiion =
-                                    FavData['discrptiion'].toString();
-                                String pdf = FavData['pdf'].toString();
-                                String main = FavData['main'].toString();
+                child: ListView.builder(
+                  itemCount: snapshot.data!.docs.length,
+                  itemBuilder: (context, index) {
+                    Map<String, dynamic> FavData = snapshot.data!.docs[index]
+                        .data() as Map<String, dynamic>;
+                    String image = FavData['image'].toString();
+                    String name = FavData['name'].toString();
+                    String discrptiion = FavData['discrptiion'].toString();
+                    String pdf = FavData['pdf'].toString();
+                    String main = FavData['main'].toString();
+                    
                       return Card(
                         child: InkWell(
                           onTap: () {
                             showModalBottomSheet(
                               context: context,
                               builder: (context) {
-                                
-
-                                return showModel(
-                                  context,
-                                  image , name , discrptiion , pdf , main
-                                );
+                                return showModel(context, image, name,
+                                    discrptiion, pdf, main);
                               },
                             );
                           },
@@ -74,16 +70,18 @@ class _FavouriteState extends State<Favourite> {
                             child: Column(
                               children: [
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Container(
                                         child: Padding(
                                       padding: const EdgeInsets.all(10.0),
                                       child: Center(
-                                          child: Image.network(
-                                        image,
+                                          child: Container(
                                         height: 70,
+                                        width: 48,
+                                        child: Image.network(
+                                          image,
+                                          fit: BoxFit.cover,
+                                        ),
                                       )),
                                     )),
                                     Container(
@@ -93,7 +91,7 @@ class _FavouriteState extends State<Favourite> {
                                         children: [
                                           Container(
                                               child: Text(
-                                        name,
+                                            name,
                                             style: TextStyle(
                                                 fontSize: 22,
                                                 fontWeight: FontWeight.w600),
@@ -102,12 +100,18 @@ class _FavouriteState extends State<Favourite> {
                                             height: 5,
                                           ),
                                           Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  1.6,
+                                              height: 40,
                                               child: Text(
-                                            discrptiion,
-                                            style: TextStyle(
-                                                fontSize: 19,
-                                                fontWeight: FontWeight.w400),
-                                          )),
+                                                discrptiion,
+                                                style: TextStyle(
+                                                    fontSize: 17,
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                              )),
                                         ],
                                       ),
                                     ),
@@ -135,9 +139,9 @@ class _FavouriteState extends State<Favourite> {
                           ),
                         ),
                       );
-                    },
-                  ),
-                
+                    
+                  },
+                ),
               );
             } else {
               return Center(child: Text("No Data"));
@@ -151,8 +155,8 @@ class _FavouriteState extends State<Favourite> {
   }
 }
 
-showModel(BuildContext context,
-    String image, String name, String discrption, String pdf, String main) {
+showModel(BuildContext context, String image, String name, String discrption,
+    String pdf, String main) {
   return SingleChildScrollView(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -177,7 +181,11 @@ showModel(BuildContext context,
                 ),
                 CupertinoButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => PdfOpen(pdf: pdf),));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PdfOpen(pdf: pdf),
+                        ));
                   },
                   child: Container(
                       width: 150,

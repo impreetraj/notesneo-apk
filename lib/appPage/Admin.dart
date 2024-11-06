@@ -491,7 +491,7 @@ class _UploadState extends State<Upload> {
                       String unit2_description =
                           description_2controller.text.trim();
                       String unit3_description =
-                          description_4controller.text.trim();
+                          description_3controller.text.trim();
                       String unit4_description =
                           description_4controller.text.trim();
 

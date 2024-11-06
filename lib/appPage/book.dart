@@ -38,6 +38,7 @@ class _BookState extends State<Book> {
                                 as Map<String, dynamic>;
                         return Column(
                           children: [
+                            SizedBox(height: 17,),
                             Container(
                                 child: Text(
                               BookData['main_name'].toString().toUpperCase(),
@@ -50,12 +51,13 @@ class _BookState extends State<Book> {
                               style: TextStyle(
                                   fontSize: 21, fontWeight: FontWeight.w500),
                             )),
+                            SizedBox(height: 10,),
                             SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.all(2.0),
                                     child: CupertinoButton(
                                         onPressed: () {
                                           showModalBottomSheet(
@@ -71,16 +73,21 @@ class _BookState extends State<Book> {
                                             },
                                           );
                                         },
-                                        child: Image.network(
-                                          BookData['image1'],
+                                        child: Container(
+                                          color: const Color.fromARGB(255, 250, 193, 193),
                                           width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              2.7,
+                                                    .size
+                                                    .width /
+                                                2.6,
+                                           height: 270,     
+                                          child: Image.network(
+                                            BookData['image1'],
+                                            fit: BoxFit.cover,
+                                          ),
                                         )),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.all(2.0),
                                     child: CupertinoButton(
                                       onPressed: () {
                                         showModalBottomSheet(
@@ -96,16 +103,21 @@ class _BookState extends State<Book> {
                                           },
                                         );
                                       },
-                                      child: Image.network(
-                                        BookData['image2'],
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                2.7,
-                                      ),
-                                    ),
+                                      child: Container(
+                                          width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2.6,
+                                           height: 270,  
+                                           color: const Color.fromARGB(255, 250, 193, 193),   
+                                          child: Image.network(
+                                            BookData['image2'],
+                                            fit: BoxFit.cover,
+                                          ),
+                                        )),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.all(2.0),
                                     child: CupertinoButton(
                                       onPressed: () {
                                         showModalBottomSheet(
@@ -121,16 +133,21 @@ class _BookState extends State<Book> {
                                           },
                                         );
                                       },
-                                      child: Image.network(
-                                        BookData['image3'],
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                2.7,
-                                      ),
-                                    ),
+                                      child: Container(
+                                          width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2.6,
+                                           height: 270,  
+                                           color: const Color.fromARGB(255, 250, 193, 193),   
+                                          child: Image.network(
+                                            BookData['image3'],
+                                            fit: BoxFit.cover,
+                                          ) ,
+                                        )),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.all(2.0),
                                     child: CupertinoButton(
                                       onPressed: () {
                                         showModalBottomSheet(
@@ -146,13 +163,18 @@ class _BookState extends State<Book> {
                                           },
                                         );
                                       },
-                                      child: Image.network(
-                                        BookData['image4'],
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                2.7,
-                                      ),
-                                    ),
+                                      child: Container(
+                                          width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2.6,
+                                           height: 270, 
+                                           color: const Color.fromARGB(255, 250, 193, 193),    
+                                          child: Image.network(
+                                            BookData['image4'],
+                                            fit: BoxFit.cover,
+                                          ),
+                                        )),
                                   ),
                                 ],
                               ),

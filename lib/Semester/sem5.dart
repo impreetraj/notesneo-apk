@@ -31,10 +31,7 @@ class _SemesterFiveState extends State<SemesterFive> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.active) {
                 if (snapshot.hasData && snapshot.data != null) {
-                  return Padding(
-                    padding: const EdgeInsets.all(12.0),
-                  
-                        child: ListView.builder(
+                  return  ListView.builder(
                       itemCount: snapshot.data!.docs.length,
                       itemBuilder: (context, index) {
                         Map<String, dynamic> BookData =
@@ -59,7 +56,7 @@ class _SemesterFiveState extends State<SemesterFive> {
                               child: Row(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.all(2.0),
                                     child: CupertinoButton(
                                         onPressed: () {
                                           showModalBottomSheet(
@@ -75,16 +72,21 @@ class _SemesterFiveState extends State<SemesterFive> {
                                             },
                                           );
                                         },
-                                        child: Image.network(
-                                          BookData['image1'],
+                                        child: Container(
                                           width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              2.7,
+                                                    .size
+                                                    .width /
+                                                2.6,
+                                           height: 270, 
+                                           color: const Color.fromARGB(255, 250, 193, 193),    
+                                          child: Image.network(
+                                            BookData['image1'],
+                                            fit: BoxFit.cover,
+                                          ),
                                         )),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.all(2.0),
                                     child: CupertinoButton(
                                       onPressed: () {
                                         showModalBottomSheet(
@@ -100,16 +102,22 @@ class _SemesterFiveState extends State<SemesterFive> {
                                           },
                                         );
                                       },
-                                      child: Image.network(
-                                        BookData['image2'],
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                2.7,
-                                      ),
+                                      child: Container(
+                                          width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2.6,
+                                           height: 270, 
+                                           color: const Color.fromARGB(255, 250, 193, 193),    
+                                          child: Image.network(
+                                            BookData['image2'],
+                                            fit: BoxFit.cover,
+                                          ),
+                                        )
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.all(2.0),
                                     child: CupertinoButton(
                                       onPressed: () {
                                         showModalBottomSheet(
@@ -125,16 +133,22 @@ class _SemesterFiveState extends State<SemesterFive> {
                                           },
                                         );
                                       },
-                                      child: Image.network(
-                                        BookData['image3'],
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                2.7,
-                                      ),
+                                      child: Container(
+                                          width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2.6,
+                                           height: 270, 
+                                           color: const Color.fromARGB(255, 250, 193, 193),    
+                                          child: Image.network(
+                                            BookData['image3'],
+                                            fit: BoxFit.cover,
+                                          ),
+                                        )
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.all(2.0),
                                     child: CupertinoButton(
                                       onPressed: () {
                                         showModalBottomSheet(
@@ -150,12 +164,18 @@ class _SemesterFiveState extends State<SemesterFive> {
                                           },
                                         );
                                       },
-                                      child: Image.network(
-                                        BookData['image4'],
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                2.7,
-                                      ),
+                                      child: Container(
+                                          width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2.6,
+                                           height: 270, 
+                                           color: const Color.fromARGB(255, 250, 193, 193),    
+                                          child: Image.network(
+                                            BookData['image4'],
+                                            fit: BoxFit.cover,
+                                          ),
+                                        )
                                     ),
                                   ),
                                 ],
@@ -164,7 +184,7 @@ class _SemesterFiveState extends State<SemesterFive> {
                           ],
                         );
                       },
-                    )
+                    
                   );
                 } else {
                   return Text("No data");
