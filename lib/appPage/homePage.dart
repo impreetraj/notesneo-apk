@@ -22,6 +22,8 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+TextEditingController reviewcontroller = TextEditingController();
+
 class _HomePageState extends State<HomePage> {
   email() {
     var currentUser = FirebaseAuth.instance.currentUser;
@@ -51,325 +53,374 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 15,
-            ),
-            Center(
-              child: InkWell(
-                  onTap: () {
-                    String email = " ";
-                    var currentUser = FirebaseAuth.instance.currentUser;
-                    if (currentUser != null) {
-                      email = currentUser.email.toString();
-                    }
-                    if (email == "deepakmodi8676@gmail.com" ||
-                        email == "preetrajoffical@gmail.com" || email== "nubhawbarnwal@gmail.com" || email== "nitishmodi78@gmail.com") {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => AdminPanel(),
-                          ));
-                    } else {
-                      const snackBar = SnackBar(
-                        content: Center(child: Text('You Are not Admin')),
-                      );
-
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    }
-                  },
-                  child: Container(
-                      width: MediaQuery.of(context).size.width / 3,
-                      height: 50,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Colors.pink),
-                      child: Center(
-                          child: Text(
-                        "Admin",
-                        style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black),
-                      )))),
-            ),
-            Image.asset("assets/logo/image.png"),
-            Container(
-              margin: EdgeInsets.only(left: 20.0),
-              child: Text(
-                "NotesNeo",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 15,
               ),
-            ),
-            SizedBox(
-              height: 7,
-            ),
-            Container(
-                margin: EdgeInsets.only(left: 20.0, right: 20.0),
+              Center(
+                child: InkWell(
+                    onTap: () {
+                      String email = " ";
+                      var currentUser = FirebaseAuth.instance.currentUser;
+                      if (currentUser != null) {
+                        email = currentUser.email.toString();
+                      }
+                      if (email == "deepakmodi8676@gmail.com" ||
+                          email == "preetrajoffical@gmail.com" ||
+                          email == "nubhawbarnwal@gmail.com" ||
+                          email == "nitishmodi78@gmail.com" || email == "saitmpreet1234@gmail.com") {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AdminPanel(),
+                            ));
+                      } else {
+                        const snackBar = SnackBar(
+                          content: Center(child: Text('You Are not Admin')),
+                        );
+      
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
+                    },
+                    child: Container(
+                        width: MediaQuery.of(context).size.width / 3,
+                        height: 50,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            color: Colors.pink),
+                        child: Center(
+                            child: Text(
+                          "Admin",
+                          style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black),
+                        )))),
+              ),
+              Image.asset("assets/logo/image.png"),
+              Container(
+                margin: EdgeInsets.only(left: 20.0),
                 child: Text(
-                  "NotesNeo is your go-to platform for accessing and downloading free academic notes. We understand the importance of high-quality educational resources, and our mission is to make learning more accessible to everyone.",
-                  style: TextStyle(fontSize: 18),
-                )),
-            SizedBox(
-              height: 7,
-            ),
-            Container(
-                margin: EdgeInsets.only(left: 20.0, right: 20.0),
-                child: Text(
-                  "Whether you're a student looking for study materials or an educator sharing knowledge, NotesNeo provides a diverse collection of notes across various subjects.",
-                  style: TextStyle(fontSize: 18),
-                )),
-            SizedBox(
-              height: 7,
-            ),
-            Container(
-                margin: EdgeInsets.only(left: 20.0, right: 20.0),
-                child: Text(
-                  "Join our community and be a part of a platform that goes beyond traditional learning, offering a space where knowledge meets innovation.",
-                  style: TextStyle(fontSize: 18),
-                )),
-            SizedBox(
-              height: 7,
-            ),
-            Container(
-                margin: EdgeInsets.only(left: 20.0, right: 20.0),
-                child: Text(
-                  "Explore our repository of notes and enhance your academic journey with NotesNeo.",
-                  style: TextStyle(fontSize: 18),
-                )),
-            SizedBox(
-              height: 20,
-            ),
-            Center(
-              child: ElevatedButton(
-                  onPressed: () {
-                    const link =
-                        "https://chat.whatsapp.com/EtBjr3a2V8n1biCfXYf1iw";
-                    launchUrl(Uri.parse(link),
-                        mode: LaunchMode.externalApplication);
-                  },
+                  "NotesNeo",
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black),
+                ),
+              ),
+              SizedBox(
+                height: 7,
+              ),
+              Container(
+                  margin: EdgeInsets.only(left: 20.0, right: 20.0),
                   child: Text(
-                    "Join Communtity",
-                    style: TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
+                    "NotesNeo is your go-to platform for accessing and downloading free academic notes. We understand the importance of high-quality educational resources, and our mission is to make learning more accessible to everyone.",
+                    style: TextStyle(fontSize: 18),
                   )),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 20.0, right: 20.0),
-              child: Card(
-                child: Container(
-                  height: 100,
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Container(
-                        width: 70,
-                        height: 70,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            color: Colors.yellow),
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.circular(50),
-                            child: Image.asset("assets/logo/preetraj.jpeg")),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Container(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 7,
-                            ),
-                            Text(
-                              "Preet Raj",
-                              style: TextStyle(
-                                  fontSize: 21, fontWeight: FontWeight.w600),
-                            ),
-                            Text(
-                              "SAITM | MDU",
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.w500),
-                            ),
-                            Text(
-                              "B.Tech CSE 22",
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.w500),
-                            ),
-                            Text(
-                              "Full Stack App Developer",
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.w500),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+              SizedBox(
+                height: 7,
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 20.0, right: 20.0),
-              child: Card(
-                child: Container(
-                  height: 100,
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 14,
-                      ),
-                      Container(
-                        width: 70,
-                        height: 70,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            color: Colors.yellow),
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.circular(50),
-                            child: Image.asset("assets/logo/deepak.jpeg")),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Container(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 7,
-                            ),
-                            Text(
-                              "Deepak Modi",
-                              style: TextStyle(
-                                  fontSize: 21, fontWeight: FontWeight.w600),
-                            ),
-                            Text(
-                              "SAITM | MDU",
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.w500),
-                            ),
-                            Text(
-                              "B.Tech CSE 22",
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.w500),
-                            ),
-                            Text(
-                              "Full Stack Web Developer",
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.w500),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+              Container(
+                  margin: EdgeInsets.only(left: 20.0, right: 20.0),
+                  child: Text(
+                    "Whether you're a student looking for study materials or an educator sharing knowledge, NotesNeo provides a diverse collection of notes across various subjects.",
+                    style: TextStyle(fontSize: 18),
+                  )),
+              SizedBox(
+                height: 7,
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 20.0, right: 20.0),
-              child: Card(
-                child: Container(
-                  height: 100,
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Container(
-                        width: 70,
-                        height: 70,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            color: Colors.yellow),
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.circular(50),
-                            child: Image.asset("assets/logo/nitish.jpeg")),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Container(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 7,
-                            ),
-                            Text(
-                              "Nitish Modi",
-                              style: TextStyle(
-                                  fontSize: 21, fontWeight: FontWeight.w600),
-                            ),
-                            Text(
-                              "SAITM | MDU",
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.w500),
-                            ),
-                            Text(
-                              "B.Tech CSE 22",
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.w500),
-                            ),
-                            Text(
-                              "Full Stack App Developer",
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.w500),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+              Container(
+                  margin: EdgeInsets.only(left: 20.0, right: 20.0),
+                  child: Text(
+                    "Join our community and be a part of a platform that goes beyond traditional learning, offering a space where knowledge meets innovation.",
+                    style: TextStyle(fontSize: 18),
+                  )),
+              SizedBox(
+                height: 7,
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              color: Color(0xff033a80),
-              child: Center(
+              Container(
+                  margin: EdgeInsets.only(left: 20.0, right: 20.0),
+                  child: Text(
+                    "Explore our repository of notes and enhance your academic journey with NotesNeo.",
+                    style: TextStyle(fontSize: 18),
+                  )),
+              SizedBox(
+                height: 20,
+              ),
+              Center(
+                child: ElevatedButton(
+                    onPressed: () {
+                      const link =
+                          "https://chat.whatsapp.com/EtBjr3a2V8n1biCfXYf1iw";
+                      launchUrl(Uri.parse(link),
+                          mode: LaunchMode.externalApplication);
+                    },
+                    child: Text(
+                      "Join Communtity",
+                      style: TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
+                    )),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 20.0, right: 20.0),
+                child: Card(
                   child: Container(
-                      margin: EdgeInsets.only(right: 30.0, left: 30.0),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 4,
+                    height: 100,
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Container(
+                          width: 70,
+                          height: 70,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: Colors.yellow),
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(50),
+                              child: Image.asset("assets/logo/preetraj.jpeg")),
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 7,
+                              ),
+                              Text(
+                                "Preet Raj",
+                                style: TextStyle(
+                                    fontSize: 21, fontWeight: FontWeight.w600),
+                              ),
+                              Text(
+                                "SAITM | MDU",
+                                style: TextStyle(
+                                    fontSize: 17, fontWeight: FontWeight.w500),
+                              ),
+                              Text(
+                                "B.Tech CSE 22",
+                                style: TextStyle(
+                                    fontSize: 17, fontWeight: FontWeight.w500),
+                              ),
+                              Text(
+                                "Full Stack App Developer",
+                                style: TextStyle(
+                                    fontSize: 17, fontWeight: FontWeight.w500),
+                              ),
+                            ],
                           ),
-                          Text(
-                            "Copyright © NotesNeo | All Rights Reserved ",
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 20.0, right: 20.0),
+                child: Card(
+                  child: Container(
+                    height: 100,
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 14,
+                        ),
+                        Container(
+                          width: 70,
+                          height: 70,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: Colors.yellow),
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(50),
+                              child: Image.asset("assets/logo/deepak.jpeg")),
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 7,
+                              ),
+                              Text(
+                                "Deepak Modi",
+                                style: TextStyle(
+                                    fontSize: 21, fontWeight: FontWeight.w600),
+                              ),
+                              Text(
+                                "SAITM | MDU",
+                                style: TextStyle(
+                                    fontSize: 17, fontWeight: FontWeight.w500),
+                              ),
+                              Text(
+                                "B.Tech CSE 22",
+                                style: TextStyle(
+                                    fontSize: 17, fontWeight: FontWeight.w500),
+                              ),
+                              Text(
+                                "Full Stack Web Developer",
+                                style: TextStyle(
+                                    fontSize: 17, fontWeight: FontWeight.w500),
+                              ),
+                            ],
                           ),
-                          SizedBox(
-                            height: 4,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 20.0, right: 20.0),
+                child: Card(
+                  child: Container(
+                    height: 100,
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Container(
+                          width: 70,
+                          height: 70,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: Colors.yellow),
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(50),
+                              child: Image.asset("assets/logo/nitish.jpeg")),
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 7,
+                              ),
+                              Text(
+                                "Nitish Modi",
+                                style: TextStyle(
+                                    fontSize: 21, fontWeight: FontWeight.w600),
+                              ),
+                              Text(
+                                "SAITM | MDU",
+                                style: TextStyle(
+                                    fontSize: 17, fontWeight: FontWeight.w500),
+                              ),
+                              Text(
+                                "B.Tech CSE 22",
+                                style: TextStyle(
+                                    fontSize: 17, fontWeight: FontWeight.w500),
+                              ),
+                              Text(
+                                "Full Stack App Developer",
+                                style: TextStyle(
+                                    fontSize: 17, fontWeight: FontWeight.w500),
+                              ),
+                            ],
                           ),
-                        ],
-                      ))),
-            )
-          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20),
+                child: TextFormField(
+                  controller: reviewcontroller,
+                  maxLines: 8,
+                  minLines: 3,
+                  maxLength: 200,
+                  keyboardType: TextInputType.multiline,
+                  decoration: InputDecoration(
+                      hintText: "Your Opinion",
+                      hintStyle:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15))),
+                ),
+              ),
+              Center(
+                child: ElevatedButton(
+                    onPressed: () {
+                      String name = " ";
+                      String profile = " ";
+                      String email = " ";
+                      var currentUser = FirebaseAuth.instance.currentUser;
+                      if (currentUser != null) {
+                        name = currentUser.displayName.toString();
+                        profile = currentUser.photoURL.toString();
+                        email = currentUser.email.toString();
+                      }
+      
+                      var review = reviewcontroller.text.toString();
+      
+                      if (review.length >= 3) {
+                        FirebaseFirestore.instance.collection("reviews").add(
+                            {"name": name,  "email": email,"profile": profile, "review": review});
+                        reviewcontroller.clear();
+                      }
+                    },
+                    child: Text(
+                      "Submit",
+                      style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                    )),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                color: Color(0xff033a80),
+                child: Center(
+                    child: Container(
+                        margin: EdgeInsets.only(right: 30.0, left: 30.0),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 4,
+                            ),
+                            Text(
+                              "Copyright © NotesNeo | All Rights Reserved ",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                            SizedBox(
+                              height: 4,
+                            ),
+                          ],
+                        ))),
+              )
+            ],
+          ),
         ),
       ),
       endDrawer: Drawer(
@@ -400,7 +451,7 @@ class _HomePageState extends State<HomePage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(
-                                height: MediaQuery.of(context).size.height / 10,
+                                height: MediaQuery.of(context).size.height / 13,
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(left: 14.0),
@@ -612,7 +663,6 @@ class _HomePageState extends State<HomePage> {
                             left: MediaQuery.of(context).size.width / 12,
                             top: MediaQuery.of(context).size.height / 47),
                         child: Center(
-                           
                             child: Text("Version : 1.0.0",
                                 style: TextStyle(
                                     fontSize: 13,

@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:deepaknote/appPage/book.dart';
 import 'package:deepaknote/appPage/bottomNav.dart';
+import 'package:deepaknote/appPage/feedback.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -30,7 +31,18 @@ class _AdminPanelState extends State<AdminPanel> {
             title: Container(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text("NotesNeo"), Icon(Icons.logout)],
+                children: [
+                  Text("NotesNeo"),
+                  InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Feedbacks(),
+                            ));
+                      },
+                      child: Icon(Icons.feedback_sharp))
+                ],
               ),
             ),
             bottom: TabBar(tabs: [
@@ -134,16 +146,29 @@ class _UploadState extends State<Upload> {
             child: Column(
               children: [
                 Center(
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => BottomNav(),));
-                },
-                child: Container(
-                  width: MediaQuery.of(context).size.width/3,
-                  height: 50,
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(30) , color: Colors.pink),
-                  child: Center(child: Text("User", style: TextStyle(fontSize: 24 , fontWeight: FontWeight.w600 , color: Colors.black),)))),
-            ),
+                  child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BottomNav(),
+                            ));
+                      },
+                      child: Container(
+                          width: MediaQuery.of(context).size.width / 3,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              color: Colors.pink),
+                          child: Center(
+                              child: Text(
+                            "User",
+                            style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black),
+                          )))),
+                ),
                 TextFormField(
                   controller: mainName_controller,
                   decoration: InputDecoration(
@@ -476,9 +501,9 @@ class _UploadState extends State<Upload> {
                 CupertinoButton(
                     onPressed: () async {
                       setState(() {
-                            submit = true;
-                          });
-                      
+                        submit = true;
+                      });
+
                       String main_name = mainName_controller.text.trim();
                       String main_description =
                           mainDescription_controller.text.trim();
@@ -820,13 +845,23 @@ class _UploadState extends State<Upload> {
                         });
                       }
                     },
-                    child:Container(
+                    child: Container(
                       width: 200,
                       height: 60,
-                      decoration: BoxDecoration(color: Colors.pink, borderRadius: BorderRadius.circular(30)),
-                      child: submit ? Center(child: CircularProgressIndicator()) : Center(child: Text("Submit" , style: TextStyle(fontSize: 24 , color: Colors.white , fontWeight: FontWeight.w600),)),
-                    )
-                        )
+                      decoration: BoxDecoration(
+                          color: Colors.pink,
+                          borderRadius: BorderRadius.circular(30)),
+                      child: submit
+                          ? Center(child: CircularProgressIndicator())
+                          : Center(
+                              child: Text(
+                              "Submit",
+                              style: TextStyle(
+                                  fontSize: 24,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600),
+                            )),
+                    ))
               ],
             ),
           ),
