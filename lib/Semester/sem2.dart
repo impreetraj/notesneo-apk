@@ -216,6 +216,7 @@ showModel(BuildContext context,
               child: Image.network(
                 image,
                 height: 270,
+                width: MediaQuery.of(context).size.width/2.2,
               ),
             ),
             Column(

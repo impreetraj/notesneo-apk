@@ -171,7 +171,7 @@ class _HomePageState extends State<HomePage> {
                 margin: EdgeInsets.only(left: 20.0, right: 20.0),
                 child: Card(
                   child: Container(
-                    height: 100,
+                    height: 112,
                     child: Row(
                       children: [
                         SizedBox(
@@ -232,7 +232,7 @@ class _HomePageState extends State<HomePage> {
                 margin: EdgeInsets.only(left: 20.0, right: 20.0),
                 child: Card(
                   child: Container(
-                    height: 100,
+                    height: 112,
                     child: Row(
                       children: [
                         SizedBox(
@@ -293,7 +293,7 @@ class _HomePageState extends State<HomePage> {
                 margin: EdgeInsets.only(left: 20.0, right: 20.0),
                 child: Card(
                   child: Container(
-                    height: 100,
+                    height: 112,
                     child: Row(
                       children: [
                         SizedBox(

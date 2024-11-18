@@ -103,7 +103,7 @@ class _FavouriteState extends State<Favourite> {
                                               width: MediaQuery.of(context)
                                                       .size
                                                       .width /
-                                                  1.6,
+                                                  1.7,
                                               height: 40,
                                               child: Text(
                                                 discrptiion,
@@ -172,6 +172,8 @@ showModel(BuildContext context, String image, String name, String discrption,
               child: Image.network(
                 image,
                 height: 270,
+                width: MediaQuery.of(context).size.width/2.2,
+
               ),
             ),
             Column(

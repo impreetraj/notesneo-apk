@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.6 <4.0.0'
+  sdk: '>=2.18.0 <3.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -44,8 +44,9 @@ dependencies:
   file_picker: ^7.0.2
   cloud_firestore: ^4.14.0
   image_picker: ^1.0.7
-  syncfusion_flutter_pdfviewer: ^22.2.8
+  syncfusion_flutter_pdfviewer: ^27.2.2
   url_launcher: ^6.1.14
+  protobuf: ^3.1.0
 
 dev_dependencies:
   flutter_test:
