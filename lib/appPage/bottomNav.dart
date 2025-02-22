@@ -36,7 +36,7 @@ class _BottomNavState extends State<BottomNav> {
           BottomNavigationBarItem(
               icon: Icon(Icons.library_books), label: "Study Material"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.favorite), label: "Favourite"),
+              icon: Icon(Icons.download), label: "Download"),
          
         ],
       ),

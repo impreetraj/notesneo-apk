@@ -1,6 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:io';
+
+import 'package:deepaknote/Db_Helper/Dbhelper.dart';
 import 'package:deepaknote/appPage/PdfOpen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -12,151 +13,135 @@ class Favourite extends StatefulWidget {
 }
 
 class _FavouriteState extends State<Favourite> {
-  email() {
-    var currentUser = FirebaseAuth.instance.currentUser;
-    if (currentUser != null) {
-      return currentUser.email.toString();
-    }
+  List<Map<String, dynamic>> allNotes = [];
+  DBHelper? dbRef;
+  bool isLoading = false; // Loading state
+
+  @override
+  void initState() {
+    super.initState();
+    dbRef = DBHelper.instance;
+    getNotes();
   }
+
+  // Method to fetch all notes
+  void getNotes() async {
+    setState(() {
+      isLoading = true; // Set loading state to true when fetching
+    });
+
+    try {
+      allNotes = await dbRef!.getFiles();
+    } catch (e) {
+      print("Error fetching notes: $e");
+    }
+
+    setState(() {
+      isLoading = false; // Reset loading state
+    });
+  }
+
+  // Method to fetch all notes
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Favourite",
-          style: TextStyle(
-              fontSize: 24, fontWeight: FontWeight.w700, color: Colors.white),
+        appBar: AppBar(
+          title: Text(
+            "Favourite",
+            style: TextStyle(
+                fontSize: 24, fontWeight: FontWeight.w700, color: Colors.white),
+          ),
+          centerTitle: true,
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.pink,
         ),
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.pink,
-      ),
-      body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance
-            .collection("Favorite")
-            .doc(email())
-            .collection(email())
-            .snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.active) {
-            if (snapshot.hasData && snapshot.data != null) {
-              return Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: ListView.builder(
-                  itemCount: snapshot.data!.docs.length,
-                  itemBuilder: (context, index) {
-                    Map<String, dynamic> FavData = snapshot.data!.docs[index]
-                        .data() as Map<String, dynamic>;
-                    String image = FavData['image'].toString();
-                    String name = FavData['name'].toString();
-                    String discrptiion = FavData['discrptiion'].toString();
-                    String pdf = FavData['pdf'].toString();
-                    String main = FavData['main'].toString();
-                    
-                      return Card(
-                        child: InkWell(
-                          onTap: () {
-                            showModalBottomSheet(
-                              context: context,
-                              builder: (context) {
-                                return showModel(context, image, name,
-                                    discrptiion, pdf, main);
-                              },
-                            );
-                          },
-                          child: Container(
-                            height: 100,
-                            child: Column(
-                              children: [
-                                Row(
+        body: Expanded(
+          child: ListView.builder(
+              itemCount: allNotes.length,
+              itemBuilder: (_, index) {
+                return Card(
+                  child: InkWell(
+                    onTap: () {
+                      String name = allNotes[index]['name'];
+                      String discrption = allNotes[index]['file_title'];
+                      String image = allNotes[index]['imagePath'];
+                      String pdf = allNotes[index]['filePath'];
+
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return showModel(
+                              context, image, name, discrption, pdf);
+                        },
+                      );
+                    },
+                    child: Container(
+                      height: 130,
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                  child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Center(
+                                    child: Container(
+                                        height: 100,
+                                        width: 66,
+                                        child: Image.file(
+                                          File(allNotes[index]['imagePath']),
+                                          fit: BoxFit.cover,
+                                        ))),
+                              )),
+                              Container(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Container(
-                                        child: Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Center(
-                                          child: Container(
-                                        height: 70,
-                                        width: 48,
-                                        child: Image.network(
-                                          image,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      )),
+                                        child: Text(
+                                      allNotes[index]['name'].toString(),
+                                      style: TextStyle(
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.w600),
                                     )),
-                                    Container(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                              child: Text(
-                                            name,
-                                            style: TextStyle(
-                                                fontSize: 22,
-                                                fontWeight: FontWeight.w600),
-                                          )),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  1.7,
-                                              height: 40,
-                                              child: Text(
-                                                discrptiion,
-                                                style: TextStyle(
-                                                    fontSize: 17,
-                                                    fontWeight:
-                                                        FontWeight.w400),
-                                              )),
-                                        ],
-                                      ),
+                                    SizedBox(
+                                      height: 5,
                                     ),
                                     Container(
-                                      child: Center(
-                                          child: CupertinoButton(
-                                              onPressed: () {
-                                                FirebaseFirestore.instance
-                                                    .collection("Favorite")
-                                                    .doc(email())
-                                                    .collection(email())
-                                                    .doc(FavData['main'] +
-                                                        FavData['name'])
-                                                    .delete();
-                                              },
-                                              child: Icon(Icons.delete))),
-                                    )
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.7,
+                                        height: 70,
+                                        child: Text(
+                                          allNotes[index]['file_title']
+                                              .toString(),
+                                          style: TextStyle(
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.w400),
+                                        )),
                                   ],
                                 ),
-                                SizedBox(
-                                  height: 10,
-                                )
-                              ],
-                            ),
+                              ),
+                              Container(
+                                  child: Center(child: Icon(Icons.delete))),
+                            ],
                           ),
-                        ),
-                      );
-                    
-                  },
-                ),
-              );
-            } else {
-              return Center(child: Text("No Data"));
-            }
-          } else {
-            return Center(child: CircularProgressIndicator());
-          }
-        },
-      ),
-    );
+                          SizedBox(
+                            height: 10,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              }),
+        ));
   }
 }
 
 showModel(BuildContext context, String image, String name, String discrption,
-    String pdf, String main) {
+    String pdf) {
   return SingleChildScrollView(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -168,14 +153,13 @@ showModel(BuildContext context, String image, String name, String discrption,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              margin: EdgeInsets.only(left: 20.0),
-              child: Image.network(
-                image,
-                height: 270,
-                width: MediaQuery.of(context).size.width/2.2,
-
-              ),
-            ),
+                margin: EdgeInsets.only(left: 20.0),
+                child: Image.file(
+                  File(image),
+                  fit: BoxFit.cover,
+                  height: 270,
+                  width: MediaQuery.of(context).size.width / 2.2,
+                )),
             Column(
               children: [
                 SizedBox(

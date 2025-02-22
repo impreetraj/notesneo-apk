@@ -72,7 +72,8 @@ class _HomePageState extends State<HomePage> {
                       if (email == "deepakmodi8676@gmail.com" ||
                           email == "preetrajoffical@gmail.com" ||
                           email == "nubhawbarnwal@gmail.com" ||
-                          email == "nitishmodi78@gmail.com" || email == "saitmpreet1234@gmail.com") {
+                          email == "nitishmodi78@gmail.com" ||
+                          email == "saitmpreet1234@gmail.com") {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -82,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                         const snackBar = SnackBar(
                           content: Center(child: Text('You Are not Admin')),
                         );
-      
+
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       }
                     },
@@ -161,7 +162,8 @@ class _HomePageState extends State<HomePage> {
                     },
                     child: Text(
                       "Join Communtity",
-                      style: TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
+                      style:
+                          TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
                     )),
               ),
               SizedBox(
@@ -171,7 +173,7 @@ class _HomePageState extends State<HomePage> {
                 margin: EdgeInsets.only(left: 20.0, right: 20.0),
                 child: Card(
                   child: Container(
-                    height: 112,
+                    height: 122,
                     child: Row(
                       children: [
                         SizedBox(
@@ -197,11 +199,15 @@ class _HomePageState extends State<HomePage> {
                               SizedBox(
                                 height: 7,
                               ),
-                              Text(
-                                "Preet Raj",
-                                style: TextStyle(
-                                    fontSize: 21, fontWeight: FontWeight.w600),
-                              ),
+                              
+                                
+                                Text(
+                                  "Preet Raj",
+                                  style: TextStyle(
+                                      fontSize: 21,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              
                               Text(
                                 "SAITM | MDU",
                                 style: TextStyle(
@@ -232,7 +238,7 @@ class _HomePageState extends State<HomePage> {
                 margin: EdgeInsets.only(left: 20.0, right: 20.0),
                 child: Card(
                   child: Container(
-                    height: 112,
+                    height: 122,
                     child: Row(
                       children: [
                         SizedBox(
@@ -293,7 +299,7 @@ class _HomePageState extends State<HomePage> {
                 margin: EdgeInsets.only(left: 20.0, right: 20.0),
                 child: Card(
                   child: Container(
-                    height: 112,
+                    height: 122,
                     child: Row(
                       children: [
                         SizedBox(
@@ -378,18 +384,23 @@ class _HomePageState extends State<HomePage> {
                         profile = currentUser.photoURL.toString();
                         email = currentUser.email.toString();
                       }
-      
+
                       var review = reviewcontroller.text.toString();
-      
+
                       if (review.length >= 3) {
-                        FirebaseFirestore.instance.collection("reviews").add(
-                            {"name": name,  "email": email,"profile": profile, "review": review});
+                        FirebaseFirestore.instance.collection("reviews").add({
+                          "name": name,
+                          "email": email,
+                          "profile": profile,
+                          "review": review
+                        });
                         reviewcontroller.clear();
                       }
                     },
                     child: Text(
                       "Submit",
-                      style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                      style:
+                          TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
                     )),
               ),
               SizedBox(
