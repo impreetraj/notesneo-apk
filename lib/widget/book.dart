@@ -4,7 +4,7 @@ import 'package:path_provider/path_provider.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:deepaknote/Db_Helper/Dbhelper.dart';
-import 'package:deepaknote/appPage/PdfOpen.dart';
+import 'package:deepaknote/widget/PdfOpendownload.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';

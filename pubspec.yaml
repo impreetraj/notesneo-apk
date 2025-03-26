@@ -50,7 +50,6 @@ dependencies:
   path_provider: ^2.0.8    
   sqflite: ^2.0.0+4
   dio: ^5.4.0 
-  open_filex: ^4.6.0
 
 dev_dependencies:
   flutter_test:

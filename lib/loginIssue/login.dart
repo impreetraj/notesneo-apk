@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:deepaknote/appPage/bottomNav.dart';
-import 'package:deepaknote/appPage/homePage.dart';
+import 'package:deepaknote/widget/bottomNav.dart';
+import 'package:deepaknote/widget/homePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,36 +16,32 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  loginwithGoogle() async {
+  Future<void> loginWithGoogle() async {
     try {
-      final googleuser = await GoogleSignIn().signIn();
+      final googleUser = await GoogleSignIn().signIn();
+      if (googleUser == null) {
+        print("Google sign-in canceled by user.");
+        return;
+      }
 
-      var name = googleuser?.displayName.toString();
-      var email = googleuser?.email.toString();
-      var photoUrl = googleuser?.photoUrl.toString();
-
-      Map<String, dynamic> Userdata = {
-        "name": name.toString(),
-        "email": email.toString(),
-        "photoUrl": photoUrl.toString(),
-      };
-
-      FirebaseFirestore.instance.collection("User").doc(email).set(Userdata);
-
-      final googleAuth = await googleuser?.authentication;
+      final googleAuth = await googleUser.authentication;
 
       final cred = GoogleAuthProvider.credential(
-          idToken: googleAuth?.idToken, accessToken: googleAuth?.accessToken);
+        idToken: googleAuth.idToken,
+        accessToken: googleAuth.accessToken,
+      );
 
-      return await FirebaseAuth.instance
-          .signInWithCredential(cred)
-          .then((value) => Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => BottomNav(),
-              )));
+      await FirebaseAuth.instance.signInWithCredential(cred);
+
+      // Navigate to BottomNav after successful login
+      if (context.mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => BottomNav()),
+        );
+      }
     } catch (ex) {
-      return print(ex.toString());
+      print("Google Sign-In Error: ${ex.toString()}");
     }
   }
 
@@ -63,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             CupertinoButton(
               onPressed: () {
-                loginwithGoogle();
+                loginWithGoogle();
               },
               child: Container(
                 height: 50,

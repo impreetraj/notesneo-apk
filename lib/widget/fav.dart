@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:deepaknote/Db_Helper/Dbhelper.dart';
-import 'package:deepaknote/appPage/PdfOpen.dart';
+import 'package:deepaknote/widget/PdfOpendownload.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -56,8 +56,7 @@ class _FavouriteState extends State<Favourite> {
           automaticallyImplyLeading: false,
           backgroundColor: Colors.pink,
         ),
-        body: Expanded(
-          child: ListView.builder(
+        body:  ListView.builder(
               itemCount: allNotes.length,
               itemBuilder: (_, index) {
                 return Card(
@@ -136,7 +135,7 @@ class _FavouriteState extends State<Favourite> {
                   ),
                 );
               }),
-        ));
+        );
   }
 }
 
@@ -170,7 +169,7 @@ showModel(BuildContext context, String image, String name, String discrption,
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => PdfOpen(pdf: pdf),
+                          builder: (context) => PdfOpens(pdf: pdf),
                         ));
                   },
                   child: Container(

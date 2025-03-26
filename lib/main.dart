@@ -1,10 +1,9 @@
-import 'package:deepaknote/appPage/Admin.dart';
-import 'package:deepaknote/appPage/book.dart';
-import 'package:deepaknote/appPage/bottomNav.dart';
-import 'package:deepaknote/appPage/feedback.dart';
-import 'package:deepaknote/appPage/homePage.dart';
+import 'package:deepaknote/widget/Admin.dart';
+import 'package:deepaknote/widget/book.dart';
+import 'package:deepaknote/widget/bottomNav.dart';
+import 'package:deepaknote/widget/feedback.dart';
+import 'package:deepaknote/widget/homePage.dart';
 import 'package:deepaknote/loginIssue/Splash.dart';
-import 'package:deepaknote/loginIssue/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:deepaknote/appPage/homePage.dart';
 import 'package:deepaknote/loginIssue/login.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';

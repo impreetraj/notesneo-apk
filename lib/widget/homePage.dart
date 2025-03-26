@@ -7,7 +7,7 @@ import 'package:deepaknote/Semester/sem5.dart';
 import 'package:deepaknote/Semester/sem6.dart';
 import 'package:deepaknote/Semester/sem7.dart';
 import 'package:deepaknote/Semester/sem8.dart';
-import 'package:deepaknote/appPage/Admin.dart';
+import 'package:deepaknote/widget/Admin.dart';
 import 'package:deepaknote/loginIssue/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';

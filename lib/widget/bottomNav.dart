@@ -1,6 +1,6 @@
-import 'package:deepaknote/appPage/book.dart';
-import 'package:deepaknote/appPage/fav.dart';
-import 'package:deepaknote/appPage/homePage.dart';
+import 'package:deepaknote/widget/book.dart';
+import 'package:deepaknote/widget/fav.dart';
+import 'package:deepaknote/widget/homePage.dart';
 import 'package:flutter/material.dart';
 
 
