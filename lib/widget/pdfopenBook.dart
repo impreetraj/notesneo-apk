@@ -13,7 +13,23 @@ class PdfOpen extends StatefulWidget {
 class _PdfOpenState extends State<PdfOpen> {
   @override
   Widget build(BuildContext context) {
-    File pdfFile = File(widget.pdf);
+    final uri = Uri.tryParse(widget.pdf);
+    final isNetwork = uri != null && (uri.isAbsolute && (uri.scheme == 'http' || uri.scheme == 'https'));
+
+    Widget body;
+    if (isNetwork) {
+      body = SfPdfViewer.network(widget.pdf);
+    } else {
+      final File pdfFile = File(widget.pdf);
+      body = pdfFile.existsSync()
+          ? SfPdfViewer.file(pdfFile)
+          : Center(
+              child: Text(
+                "File not found!",
+                style: TextStyle(fontSize: 18, color: Colors.red),
+              ),
+            );
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -21,14 +37,7 @@ class _PdfOpenState extends State<PdfOpen> {
         title: Text("PDF Viewer"),
         centerTitle: true,
       ),
-      body: pdfFile.existsSync()
-          ? SfPdfViewer.file(pdfFile)
-          : Center(
-              child: Text(
-                "File not found!",
-                style: TextStyle(fontSize: 18, color: Colors.red),
-              ),
-            ),
+      body: body,
     );
   }
 }

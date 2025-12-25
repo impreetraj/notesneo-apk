@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   logout() async {
-    GoogleSignIn().disconnect();
+    await GoogleSignIn.instance.disconnect();
     await FirebaseAuth.instance
         .signOut()
         .then((value) => Navigator.pushReplacement(
@@ -442,15 +442,30 @@ class _HomePageState extends State<HomePage> {
                 .doc(email())
                 .snapshots(),
             builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return new CircularProgressIndicator();
-              }
-              Map<String, dynamic> profile =
-                  snapshot.data!.data() as Map<String, dynamic>;
+                if (!snapshot.hasData) {
+                return const Center(child: CircularProgressIndicator());
+                }
 
-              String image = profile['photoUrl'].toString();
+                final doc = snapshot.data;
+                final Map<String, dynamic>? profile =
+                  doc?.data() as Map<String, dynamic>?;
 
-              return Container(
+                final String image = (profile != null && profile['photoUrl'] != null)
+                  ? profile['photoUrl'].toString()
+                  : 'null';
+
+                final String name = (profile != null && profile['name'] != null)
+                  ? profile['name'].toString().toUpperCase()
+                  : (FirebaseAuth.instance.currentUser?.displayName ??
+                      'USER')
+                    .toString()
+                    .toUpperCase();
+
+                final String emailText = (profile != null && profile['email'] != null)
+                  ? profile['email'].toString()
+                  : (FirebaseAuth.instance.currentUser?.email ?? '');
+
+                return Container(
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -485,8 +500,8 @@ class _HomePageState extends State<HomePage> {
                                 padding:
                                     const EdgeInsets.only(left: 14.0, top: 10),
                                 child: Container(
-                                  child: Text(
-                                    profile['name'].toString().toUpperCase(),
+                                      child: Text(
+                                    name,
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w700),
@@ -498,7 +513,7 @@ class _HomePageState extends State<HomePage> {
                                     const EdgeInsets.only(left: 14.0, top: 5),
                                 child: Container(
                                   child: Text(
-                                    profile['email'].toString(),
+                                    emailText,
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500),

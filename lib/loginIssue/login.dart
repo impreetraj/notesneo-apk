@@ -18,17 +18,20 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   Future<void> loginWithGoogle() async {
     try {
-      final googleUser = await GoogleSignIn().signIn();
-      if (googleUser == null) {
-        print("Google sign-in canceled by user.");
-        return;
-      }
-
+      final googleUser = await GoogleSignIn.instance.authenticate();
       final googleAuth = await googleUser.authentication;
+      String? accessToken;
+      try {
+        final clientAuth = await googleUser.authorizationClient
+            .authorizationForScopes(['email', 'profile', 'openid']);
+        accessToken = clientAuth?.accessToken;
+      } catch (_) {
+        accessToken = null;
+      }
 
       final cred = GoogleAuthProvider.credential(
         idToken: googleAuth.idToken,
-        accessToken: googleAuth.accessToken,
+        accessToken: accessToken,
       );
 
       await FirebaseAuth.instance.signInWithCredential(cred);
