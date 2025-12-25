@@ -522,150 +522,53 @@ class _HomePageState extends State<HomePage> {
                               )
                             ]),
                       ),
-                      Container(
-                        width: double.infinity,
-                        height: MediaQuery.of(context).size.height / 19,
-                        margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width / 12,
-                            top: MediaQuery.of(context).size.height / 47),
-                        child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SemesterOne()));
-                            },
-                            child: Text(
-                              "Semester 1",
-                              style: TextStyle(
-                                  fontSize: 23, fontWeight: FontWeight.w600),
-                            )),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        height: MediaQuery.of(context).size.height / 19,
-                        margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width / 12,
-                            top: MediaQuery.of(context).size.height / 47),
-                        child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SemesterTwo()));
-                            },
-                            child: Text("Semester 2",
-                                style: TextStyle(
-                                    fontSize: 23,
-                                    fontWeight: FontWeight.w600))),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        height: MediaQuery.of(context).size.height / 19,
-                        margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width / 12,
-                            top: MediaQuery.of(context).size.height / 47),
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SemesterThree()));
-                          },
-                          child: Text("Semester 3",
-                              style: TextStyle(
-                                  fontSize: 23, fontWeight: FontWeight.w600)),
+                      ExpansionTile(
+                        title: Text(
+                          'BTech',
+                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
                         ),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        height: MediaQuery.of(context).size.height / 19,
-                        margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width / 12,
-                            top: MediaQuery.of(context).size.height / 47),
-                        child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SemesterFour()));
-                            },
-                            child: Text("Semester 4",
-                                style: TextStyle(
-                                    fontSize: 23,
-                                    fontWeight: FontWeight.w600))),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        height: MediaQuery.of(context).size.height / 19,
-                        margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width / 12,
-                            top: MediaQuery.of(context).size.height / 47),
-                        child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SemesterFive()));
-                            },
-                            child: Text("Semester 5",
-                                style: TextStyle(
-                                    fontSize: 23,
-                                    fontWeight: FontWeight.w600))),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        height: MediaQuery.of(context).size.height / 19,
-                        margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width / 12,
-                            top: MediaQuery.of(context).size.height / 47),
-                        child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SemesterSix()));
-                            },
-                            child: Text("Semester 6",
-                                style: TextStyle(
-                                    fontSize: 23,
-                                    fontWeight: FontWeight.w600))),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        height: MediaQuery.of(context).size.height / 19,
-                        margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width / 12,
-                            top: MediaQuery.of(context).size.height / 47),
-                        child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SemesterSeven()));
-                            },
-                            child: Text("Semester 7",
-                                style: TextStyle(
-                                    fontSize: 23,
-                                    fontWeight: FontWeight.w600))),
-                      ),
-                      Container(
-                        width: double.infinity,
-                        height: MediaQuery.of(context).size.height / 19,
-                        margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width / 12,
-                            top: MediaQuery.of(context).size.height / 47),
-                        child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SemesterEight()));
-                            },
-                            child: Text("Semester 8",
-                                style: TextStyle(
-                                    fontSize: 23,
-                                    fontWeight: FontWeight.w600))),
+                        children: [
+                          ListTile(
+                            contentPadding: EdgeInsets.only(left: MediaQuery.of(context).size.width/12),
+                            title: Text('Semester 1', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+                            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => SemesterOne())),
+                          ),
+                          ListTile(
+                            contentPadding: EdgeInsets.only(left: MediaQuery.of(context).size.width/12),
+                            title: Text('Semester 2', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+                            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => SemesterTwo())),
+                          ),
+                          ListTile(
+                            contentPadding: EdgeInsets.only(left: MediaQuery.of(context).size.width/12),
+                            title: Text('Semester 3', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+                            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => SemesterThree())),
+                          ),
+                          ListTile(
+                            contentPadding: EdgeInsets.only(left: MediaQuery.of(context).size.width/12),
+                            title: Text('Semester 4', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+                            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => SemesterFour())),
+                          ),
+                          ListTile(
+                            contentPadding: EdgeInsets.only(left: MediaQuery.of(context).size.width/12),
+                            title: Text('Semester 5', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+                            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => SemesterFive())),
+                          ),
+                          ListTile(
+                            contentPadding: EdgeInsets.only(left: MediaQuery.of(context).size.width/12),
+                            title: Text('Semester 6', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+                            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => SemesterSix())),
+                          ),
+                          ListTile(
+                            contentPadding: EdgeInsets.only(left: MediaQuery.of(context).size.width/12),
+                            title: Text('Semester 7', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+                            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => SemesterSeven())),
+                          ),
+                          ListTile(
+                            contentPadding: EdgeInsets.only(left: MediaQuery.of(context).size.width/12),
+                            title: Text('Semester 8', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+                            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => SemesterEight())),
+                          ),
+                        ],
                       ),
                       Container(
                         width: double.infinity,
