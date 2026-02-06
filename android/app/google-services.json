@@ -12,7 +12,28 @@
           "package_name": "com.example.deepaknote"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "55496018574-brlnu9ibhtvunpsfps9hdra9rajrci2a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.deepaknote",
+            "certificate_hash": "98e20e29951fd5bfa0f8a538b61182d3fda42461"
+          }
+        },
+        {
+          "client_id": "55496018574-vu4bohjb3uicfqi13eckrc7cg393ehrg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.deepaknote",
+            "certificate_hash": "dd84ae60902aa71a7c3cc2df86b3bad41ae56894"
+          }
+        },
+        {
+          "client_id": "55496018574-ku6m442lm5mpd7983520r3fg9qm9qb5l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDBCjqWipbSORzpa4l2oKOqGzeViHj___g"
@@ -20,7 +41,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "55496018574-ku6m442lm5mpd7983520r3fg9qm9qb5l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

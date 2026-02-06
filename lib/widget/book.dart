@@ -1,13 +1,6 @@
-
-import 'package:dio/dio.dart';
-import 'package:path_provider/path_provider.dart';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:deepaknote/Db_Helper/Dbhelper.dart';
-import 'package:deepaknote/widget/PdfOpendownload.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:deepaknote/Semester/btech/sem_common.dart';
 import 'package:flutter/material.dart';
-import 'dart:io';
 
 class Book extends StatefulWidget {
   const Book({super.key});
@@ -17,366 +10,317 @@ class Book extends StatefulWidget {
 }
 
 class _BookState extends State<Book> {
-  DBHelper? dbRef;
+  String selectedCourse = "B Tech";
+  int selectedYear = 1;
+  int selectedSemester = 1;
+  String searchQuery = "";
 
-    @override
-  void initState() {
-    super.initState();
-    dbRef = DBHelper.instance;
-    
-  }
+  // 🔥 Must be >= 44 to avoid clipping
+  static const double filterHeight = 44;
 
-  // Method to fetch all notes
- 
-
-  // Method to handle adding a new note
-  
   @override
   Widget build(BuildContext context) {
+    String collectionName = "semester$selectedSemester";
+    String title = "$selectedCourse - Sem $selectedSemester";
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Book"),
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.pink,
-      ),
-      body: Column(
-        children: [
-          Expanded(
-              child: StreamBuilder<QuerySnapshot>(
-            stream: FirebaseFirestore.instance.collection("admin").snapshots(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.active) {
-                if (snapshot.hasData && snapshot.data != null) {
-                  return ListView.builder(
-                    itemCount: snapshot.data!.docs.length,
-                    itemBuilder: (context, index) {
-                      Map<String, dynamic> BookData = snapshot.data!.docs[index]
-                          .data() as Map<String, dynamic>;
-                      return Column(
-                        children: [
-                          SizedBox(
-                            height: 17,
-                          ),
-                          Container(
-                              child: Text(
-                            BookData['main_name'].toString().toUpperCase(),
-                            style: TextStyle(
-                                fontSize: 30, fontWeight: FontWeight.w700),
-                          )),
-                          Container(
-                              child: Text(
-                            BookData['main_decription'],
-                            style: TextStyle(
-                                fontSize: 21, fontWeight: FontWeight.w500),
-                          )),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(2.0),
-                                  child: CupertinoButton(
-                                      onPressed: () {
-                                        showModalBottomSheet(
-                                          context: context,
-                                          builder: (context) {
-                                            return showModel(
-                                                context,
-                                                BookData['image1'],
-                                                BookData['unit1_name'],
-                                                BookData['unit1_description'],
-                                                BookData['link1'],
-                                                BookData['main_name'],
-                                                dbRef!
-                                                );
-                                          },
-                                        );
-                                      },
-                                      child: Container(
-                                        color: const Color.fromARGB(
-                                            255, 250, 193, 193),
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                2.6,
-                                        height: 270,
-                                        child: Image.network(
-                                          BookData['image1'],
-                                          fit: BoxFit.cover,
-                                        ),
-                                      )),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(2.0),
-                                  child: CupertinoButton(
-                                      onPressed: () {
-                                        showModalBottomSheet(
-                                          context: context,
-                                          builder: (context) {
-                                            return showModel(
-                                                context,
-                                                BookData['image2'],
-                                                BookData['unit2_name'],
-                                                BookData['unit2_description'],
-                                                BookData['link2'],
-                                                BookData['main_name'],dbRef!);
-                                          },
-                                        );
-                                      },
-                                      child: Container(
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                2.6,
-                                        height: 270,
-                                        color: const Color.fromARGB(
-                                            255, 250, 193, 193),
-                                        child: Image.network(
-                                          BookData['image2'],
-                                          fit: BoxFit.cover,
-                                        ),
-                                      )),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(2.0),
-                                  child: CupertinoButton(
-                                      onPressed: () {
-                                        showModalBottomSheet(
-                                          context: context,
-                                          builder: (context) {
-                                            return showModel(
-                                                context,
-                                                BookData['image3'],
-                                                BookData['unit3_name'],
-                                                BookData['unit3_description'],
-                                                BookData['link3'],
-                                                BookData['main_name'],dbRef!);
-                                          },
-                                        );
-                                      },
-                                      child: Container(
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                2.6,
-                                        height: 270,
-                                        color: const Color.fromARGB(
-                                            255, 250, 193, 193),
-                                        child: Image.network(
-                                          BookData['image3'],
-                                          fit: BoxFit.cover,
-                                        ),
-                                      )),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(2.0),
-                                  child: CupertinoButton(
-                                      onPressed: () {
-                                        showModalBottomSheet(
-                                          context: context,
-                                          builder: (context) {
-                                            return showModel(
-                                                context,
-                                                BookData['image4'],
-                                                BookData['unit4_name'],
-                                                BookData['unit4_description'],
-                                                BookData['link4'],
-                                                BookData['main_name'],dbRef!);
-                                          },
-                                        );
-                                      },
-                                      child: Container(
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                2.6,
-                                        height: 270,
-                                        color: const Color.fromARGB(
-                                            255, 250, 193, 193),
-                                        child: Image.network(
-                                          BookData['image4'],
-                                          fit: BoxFit.cover,
-                                        ),
-                                      )),
-                                ),
-                              ],
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+
+            // ================= HEADER =================
+            Container(
+              padding: const EdgeInsets.only(top: 50, left: 20, right: 20, bottom: 20),
+              decoration: BoxDecoration(
+                color: Colors.teal[400],
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(30),
+                  bottomRight: Radius.circular(30),
+                ),
+              ),
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Hi there, what",
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  ),
+                  const Text(
+                    "you learning today?",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: TextField(
+                      onChanged: (v) => setState(() => searchQuery = v.toLowerCase()),
+                      decoration: const InputDecoration(
+                        hintText: "Search for notes, keywords...",
+                        border: InputBorder.none,
+                        prefixIcon: Icon(Icons.search, color: Colors.grey),
+                        contentPadding: EdgeInsets.symmetric(vertical: 15),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // ================= FILTERS =================
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        ...["B Tech", "BCA", "M Tech"].map(
+                          (course) => _buildCategoryChip(course, selectedCourse == course),
+                        ),
+
+                        const SizedBox(width: 10),
+
+                        // ✅ YEAR DROPDOWN (FIXED)
+                        SizedBox(
+                          height: filterHeight,
+                          width: 120,
+                          child: DropdownButtonFormField<int>(
+                            value: selectedYear,
+                            isDense: true,
+                            icon: const Icon(Icons.arrow_drop_down),
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.grey[200],
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 14,
+                                vertical: 10, // 🔥 IMPORTANT
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(22),
+                                borderSide: BorderSide.none,
+                              ),
                             ),
-                          )
-                        ],
-                      );
-                    },
-                  );
-                } else {
-                  return Text("No data");
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              height: 1.2, // 🔥 prevents text cut
+                              color: Colors.black87,
+                            ),
+                            onChanged: (value) {
+                              setState(() {
+                                selectedYear = value!;
+                                selectedSemester = (selectedYear * 2) - 1;
+                              });
+                            },
+                            items: _getYearList(selectedCourse)
+                                .map(
+                                  (value) => DropdownMenuItem<int>(
+                                    value: value,
+                                    child: Text("Year $value"),
+                                  ),
+                                )
+                                .toList(),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  const Text(
+                    "Select Semester",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  Wrap(
+                    spacing: 10,
+                    children: [
+                      _buildSemChip(
+                        "Sem ${(selectedYear * 2) - 1}",
+                        selectedSemester == (selectedYear * 2) - 1,
+                        (selectedYear * 2) - 1,
+                      ),
+                      _buildSemChip(
+                        "Sem ${selectedYear * 2}",
+                        selectedSemester == selectedYear * 2,
+                        selectedYear * 2,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
+            // ================= TITLE =================
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                "Notes for You ($title)",
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+
+            const SizedBox(height: 15),
+
+            // ================= GRID =================
+            StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection("adminsem")
+                  .doc("semester")
+                  .collection(collectionName)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return const Center(child: CircularProgressIndicator());
                 }
-              } else {
-                return Center(child: CircularProgressIndicator());
-              }
-            },
-          ))
-        ],
+
+                final docs = snapshot.data!.docs.where((doc) {
+                  final name = (doc['main_name'] as String).toLowerCase();
+                  return name.contains(searchQuery);
+                }).toList();
+
+                if (docs.isEmpty) {
+                  return const Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(20),
+                      child: Text("No matches found"),
+                    ),
+                  );
+                }
+
+                return GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: const EdgeInsets.all(15),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    childAspectRatio: 1.3,
+                  ),
+                  itemCount: docs.length,
+                  itemBuilder: (context, index) {
+                    final data = docs[index].data() as Map<String, dynamic>;
+
+                    return InkWell(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => UnitsListScreen(
+                            subjectName: data['main_name'],
+                            unitsData: data,
+                          ),
+                        ),
+                      ),
+                      child: Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.05),
+                              blurRadius: 10,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Icon(Icons.book, size: 32, color: Colors.teal),
+                            Text(
+                              data['main_name'],
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            const Text(
+                              "View Material",
+                              style: TextStyle(fontSize: 10, color: Colors.teal),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
-}
 
-Future<String?> downloadFile(
-    String name,
-    String description, 
-    String iUrl, 
-    String imageName,
-    String fUrl, 
-    String fileName) async {
-  try {
-    Directory directory = await getApplicationDocumentsDirectory();
-    
-    // Full path for image
-    String imagePath = '${directory.path}/$imageName';
-    Dio dio = Dio();
-    await dio.download(iUrl, imagePath);
-
-    // Full path for file
-    String filePath = '${directory.path}/$fileName';
-    await dio.download(fUrl, filePath);
-
-    // Store full file paths in database
-    await DBHelper.instance.insertFile(name, description, filePath, imagePath);
-
-    return filePath;
-  } catch (e) {
-    print("Error downloading file: $e");
-    return null;
+  // ================= HELPERS =================
+  List<int> _getYearList(String course) {
+    if (course == "B Tech") return [1, 2, 3, 4];
+    if (course == "BCA") return [1, 2, 3];
+    return [1, 2];
   }
-}
 
-
-showModel(BuildContext context, String image, String name, String discrption,
-    String pdf, String main , DBHelper dbRef) {
-  return SingleChildScrollView(
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          height: 10,
+  Widget _buildCategoryChip(String label, bool selected) {
+    return InkWell(
+      onTap: () {
+        setState(() {
+          selectedCourse = label;
+          selectedYear = 1;
+          selectedSemester = 1;
+        });
+      },
+      child: Container(
+        margin: const EdgeInsets.only(right: 10),
+        height: filterHeight,
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: selected ? Colors.teal[400] : Colors.grey[200],
+          borderRadius: BorderRadius.circular(22),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              margin: EdgeInsets.only(left: 20.0),
-              child: Image.network(
-                image,
-                height: 270,
-                width: MediaQuery.of(context).size.width / 2.2,
-              ),
-            ),
-            Column(
-              children: [
-                Container(
-                    margin: EdgeInsets.only(left: 30, bottom: 10),
-                    child: CupertinoButton(
-                        onPressed: () async {
-                          String filePath = name + ".pdf";
-                          String imagePath = name + ".jpeg";
-                        //  String? doFile = await downloadFile(image, filePath, "pdf");
-                        //  String? doimage = await downloadFile(image, imagePath, "jpeg");
-                           downloadFile(name, discrption, image, imagePath,pdf,filePath);
-
-                          // String email = " ";
-                          // var currentUser = FirebaseAuth.instance.currentUser;
-                          // if (currentUser != null) {
-                          //   email = currentUser.email.toString();
-                          // }
-
-                          // File? _imageFile;
-                          // File? _pdfFile;
-
-                          // String? _imageBase64;
-                          // String? _pdfBase64;
-                          // _imageFile = File(image);
-                          // List<int> imageBytes = await _imageFile.readAsBytes();
-                          // String base64Image = base64Encode(imageBytes);
-                          // _imageBase64 = base64Image;
-
-                          // _pdfFile = File(pdf);
-                          // List<int> pdfBytes = await _pdfFile.readAsBytes();
-                          // String base64pdf = base64Encode(pdfBytes);
-                          // _pdfBase64 = base64pdf;
-
-                          // Map<String, dynamic> user = {
-                          //   'title': name,
-                          //   'descrption': discrption,
-                          //   'image': _imageBase64,
-                          //   'pdf': _pdfBase64
-                          // };
-
-                          // await DBHelper.dbHelper.insertBook(user);
-
-                          // FirebaseFirestore.instance
-                          //     .collection("Favorite")
-                          //     .doc(email)
-                          //     .collection(email)
-                          //     .doc(main + name)
-                          //     .set({
-                          //   "name": name,
-                          //   "discrptiion": discrption,
-                          //   "pdf": pdf,
-                          //   "main": main,
-                          //   "image": image
-                          // });
-                        },
-                        child: Icon(Icons.download, size: 50))),
-                SizedBox(
-                  height: 170,
-                ),
-                CupertinoButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PdfOpen(pdf: pdf),
-                        ));
-                  },
-                  child: Container(
-                      width: 150,
-                      height: 40,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.pink.shade400),
-                      child: Center(
-                          child: Text(
-                        "VIEW PDF",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500),
-                      ))),
-                )
-              ],
-            )
-          ],
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Container(
-          margin: EdgeInsets.only(left: 30.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                  child: Text(
-                name,
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-              )),
-              Container(
-                  child: Text(discrption,
-                      style:
-                          TextStyle(fontSize: 22, fontWeight: FontWeight.w700)))
-            ],
+        child: Text(
+          label,
+          style: TextStyle(
+            color: selected ? Colors.white : Colors.black87,
+            fontWeight: FontWeight.bold,
           ),
-        )
-      ],
-    ),
-  );
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSemChip(String label, bool selected, int sem) {
+    return InkWell(
+      onTap: () => setState(() => selectedSemester = sem),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+        decoration: BoxDecoration(
+          color: selected ? Colors.teal[400] : Colors.teal[50],
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Text(
+          label,
+          style: TextStyle(
+            color: selected ? Colors.white : Colors.teal,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
 }

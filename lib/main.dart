@@ -1,8 +1,4 @@
-import 'package:deepaknote/widget/Admin.dart';
-import 'package:deepaknote/widget/book.dart';
 import 'package:deepaknote/widget/bottomNav.dart';
-import 'package:deepaknote/widget/feedback.dart';
-import 'package:deepaknote/widget/homePage.dart';
 import 'package:deepaknote/loginIssue/Splash.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';

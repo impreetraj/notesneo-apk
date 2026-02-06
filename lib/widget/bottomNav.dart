@@ -29,7 +29,7 @@ class _BottomNavState extends State<BottomNav> {
           });
         },
         currentIndex: currentIndex,
-        selectedItemColor: Colors.orange,
+        selectedItemColor: Colors.teal[400],
         unselectedItemColor: Colors.black,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),

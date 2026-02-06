@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Web client ID for Google Sign-In (from google-services.json) -->
+    <string name="default_web_client_id">55496018574-ku6m442lm5mpd7983520r3fg9qm9qb5l.apps.googleusercontent.com</string>
+</resources>

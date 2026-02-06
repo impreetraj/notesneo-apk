@@ -1,12 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:deepaknote/widget/bottomNav.dart';
-import 'package:deepaknote/widget/homePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lottie/lottie.dart';
-import 'package:sign_in_button/sign_in_button.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -16,22 +14,41 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  // Use the plugin singleton. Avoid constructing GoogleSignIn directly
+  // because the current plugin version doesn't expose that constructor.
   Future<void> loginWithGoogle() async {
     try {
-      final googleUser = await GoogleSignIn().signIn();
-      if (googleUser == null) {
-        print("Google sign-in canceled by user.");
+      // Ensure the plugin is initialized with the Android server client ID
+      await GoogleSignIn.instance.initialize(
+        serverClientId:
+            '55496018574-ku6m442lm5mpd7983520r3fg9qm9qb5l.apps.googleusercontent.com',
+      );
+
+      // Authenticate using the new API (authenticate() is supported on Android)
+      final googleUser = await GoogleSignIn.instance.authenticate();
+
+        final googleAuth = await googleUser.authentication;
+        final String? idToken = googleAuth.idToken;
+
+      if (idToken == null) {
+        print('Google Sign-In Error: idToken is null');
         return;
       }
 
-      final googleAuth = await googleUser.authentication;
-
       final cred = GoogleAuthProvider.credential(
-        idToken: googleAuth.idToken,
-        accessToken: googleAuth.accessToken,
+        idToken: idToken,
       );
 
-      await FirebaseAuth.instance.signInWithCredential(cred);
+      final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(cred);
+      final User? user = userCredential.user;
+
+      if (user != null) {
+        await FirebaseFirestore.instance.collection("User").doc(user.email).set({
+          "name": user.displayName,
+          "email": user.email,
+          "photoUrl": user.photoURL,
+        }, SetOptions(merge: true));
+      }
 
       // Navigate to BottomNav after successful login
       if (context.mounted) {

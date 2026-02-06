@@ -39,7 +39,21 @@ class _FeedbacksState extends State<Feedbacks> {
                         return ListTile(
                           leading: ClipRRect(
                             borderRadius: BorderRadius.circular(50),
-                            child: Image.network(image)),
+                            child: (image == "null" || image.isEmpty) 
+                                ? Container(
+                                    width: 40,
+                                    height: 40,
+                                    color: Colors.pink.withOpacity(0.1),
+                                    child: Icon(Icons.person, color: Colors.pink),
+                                  )
+                                : Image.network(
+                                    image,
+                                    width: 40,
+                                    height: 40,
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (context, error, stackTrace) => Icon(Icons.person),
+                                  ),
+                          ),
                           title: Container(
                             width: MediaQuery.of(context)
                                                       .size

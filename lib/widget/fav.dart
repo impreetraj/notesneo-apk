@@ -54,7 +54,7 @@ class _FavouriteState extends State<Favourite> {
           ),
           centerTitle: true,
           automaticallyImplyLeading: false,
-          backgroundColor: Colors.pink,
+          backgroundColor: Colors.teal[400],
         ),
         body:  ListView.builder(
               itemCount: allNotes.length,
@@ -85,13 +85,15 @@ class _FavouriteState extends State<Favourite> {
                                   child: Padding(
                                 padding: const EdgeInsets.all(10.0),
                                 child: Center(
-                                    child: Container(
-                                        height: 100,
-                                        width: 66,
-                                        child: Image.file(
-                                          File(allNotes[index]['imagePath']),
-                                          fit: BoxFit.cover,
-                                        ))),
+                                    child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(8),
+                                        child: Container(
+                                            height: 100,
+                                            width: 66,
+                                            child: Image.file(
+                                              File(allNotes[index]['imagePath']),
+                                              fit: BoxFit.cover,
+                                            )))),
                               )),
                               Container(
                                 child: Column(
@@ -169,7 +171,11 @@ showModel(BuildContext context, String image, String name, String discrption,
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => PdfOpens(pdf: pdf),
+                          builder: (context) => PdfOpens(
+                            pdf: pdf,
+                            name: name,
+                            image: image,
+                          ),
                         ));
                   },
                   child: Container(
@@ -177,7 +183,7 @@ showModel(BuildContext context, String image, String name, String discrption,
                       height: 40,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Colors.pink.shade400),
+                          color: Colors.teal[400]),
                       child: Center(
                           child: Text(
                         "VIEW PDF",
